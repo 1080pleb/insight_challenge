@@ -16,6 +16,7 @@ class Record:
         command_str = row[row.find('"') + 1:row.rfind('"')]
         command_parts = command_str.split()
         if len(command_parts) == 1:
+            self.command = 'GET'
             self.resource = command_parts
         elif len(command_parts) == 2:
             self.command = command_parts[0]
