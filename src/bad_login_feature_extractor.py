@@ -45,7 +45,6 @@ class HostTracker:
     num_inactive_windows = 0
     
     # checks number of open windows for given time period (20s)
-    print('ACTIVE WINDOWS', self.active_windows)
     for win in self.active_windows:
         if r.timestamp < win.start_time + datetime.timedelta(seconds=20):
             win.count += 1
@@ -69,7 +68,6 @@ class BadLoginFeatureExtractor:
     self.blocked_records = []
 
   def add_record(self, r):
-    print(r)
     if self.last_time and self.last_time > r.timestamp:
       raise Exception('Event went back in time ' + str(r))
     if not self.last_time:
