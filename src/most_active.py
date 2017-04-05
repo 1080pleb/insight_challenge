@@ -47,7 +47,7 @@ now = time.clock()
 hours = BusyHoursFeatureExtractor()
 hosts = HostsFeatureExtractor()
 resources = BandwidthFeatureExtractor()
-blocks = BadLoginFeatureExtractor()
+blocked = BadLoginFeatureExtractor()
 
 with open(input_log, encoding="ISO-8859-1") as f:
   for line in f.readlines():
@@ -63,18 +63,29 @@ with open(input_log, encoding="ISO-8859-1") as f:
           hours.add_record(r)
           hosts.add_record(r)
           resources.add_record(r)
-          blocks.add_record(r)
+          blocked.add_record(r)
       except KeyboardInterrupt:
           raise
       except Exception as e:
           print(e)
           print('Error parsing line:', line)
 
-results = h.flush()
-print(results)
-results = h.flush()
-print(results)
-results = h.flush()
-print(results)
-results = h.flush()
-print(results)
+results = hosts.flush()
+with open('hosts.txt', 'w') as w:
+    for item in results:
+        w.write("%s,%s\n" % (item[0], item[1]))
+
+results = hours.flush()
+with open('hours.txt', 'w') as x:
+    for item in results:
+        x.write("%s,%s\n" % (item[0], item[1]))
+
+results = resources.flush()
+with open('resources.txt', 'w') as y:
+    for item in results:
+        y.write("%s\n" % item)
+
+results = blocked.flush()
+with open('blocked.txt', 'w') as z:
+    for item in results:
+        z.write("%s\n" % item)
