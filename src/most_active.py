@@ -26,20 +26,27 @@ def print_progress (iteration, total, prefix = '', suffix = '', decimals = 1, le
     if iteration == total: 
         print()
 
-h = BusyHoursFeatureExtractor()
+
 processed = 0
-total = 4400644
+total = 4400644 # we cheated and know apriori
 now = time.clock()
+
+hours = BusyHoursFeatureExtractor()
+hosts = HostsFeatureExtractor()
+
 with open('log.txt', encoding="ISO-8859-1") as f:
   start = time.now()
   for line in f.readlines():
+      # Handle progress bar
       if time.clock() - now > 1:
         print_progress(processed, total, suffix="%d/%d" % (processed, total))
         now = time.clock()
       processed += 1
+      
+      # Actually do the heavy lifting
       try:
           r = record.Record(line)
-          h.add_record(r)
+          hours.add_record(r)
       except KeyboardInterrupt:
           raise
       except Exception as e:
@@ -48,4 +55,3 @@ with open('log.txt', encoding="ISO-8859-1") as f:
 
 results = h.flush()
 print(results)
-
