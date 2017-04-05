@@ -14,7 +14,7 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
         '/shuttle/countdown/',
         '/shuttle/countdown/liftoff.html'
     ])
-    
+
   def test_larger_records_file(self):
     records = record.read_from_file('../insight_testsuite/tests/test_features/log_input/log_test_100.txt')
     h = BandwidthFeatureExtractor()
@@ -35,6 +35,17 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
         'port26.annex2.nwlink.com',
     ])
     
+
+  def test_sort_order(self):
+    r1 = record.Record('b - - [01/Jul/1995:00:00:11 -0400] "GET /b HTTP/1.0" 304 0')
+    r2 = record.Record('c - - [01/Jul/1995:00:00:11 -0400] "GET /c HTTP/1.0" 304 0')
+    r3 = record.Record('a - - [01/Jul/1995:00:00:11 -0400] "GET /a HTTP/1.0" 304 0')
+
+    h = BandwidthFeatureExtractor()
+    h.add_record(r1)
+    h.add_record(r2)
+    h.add_record(r3)
+    self.assertListEqual(results, ['/a', '/b', '/c'])
 
 
 if __name__ == '__main__':
