@@ -6,6 +6,9 @@ def parse_time(time_str):
   """Parses a time in the format provided by our logs."""
   return datetime.strptime(time_str, TIME_FORMAT)
 
+def print_time(dt):
+  return dt.strftime(TIME_FORMAT)
+
 class Record:
     def __init__(self, row):
         parts = row.split()

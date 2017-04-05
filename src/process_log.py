@@ -1,4 +1,3 @@
-#Implement feature 1
 import record
 from busy_hours_feature_extractor import BusyHoursFeatureExtractor
 from bad_login_feature_extractor import BadLoginFeatureExtractor
@@ -71,21 +70,21 @@ with open(input_log, encoding="ISO-8859-1") as f:
           print('Error parsing line:', line)
 
 results = hosts.flush()
-with open('hosts.txt', 'w') as w:
+with open(output_hosts, 'w') as w:
     for item in results:
         w.write("%s,%s\n" % (item[0], item[1]))
 
 results = hours.flush()
-with open('hours.txt', 'w') as x:
+with open(output_hours, 'w') as x:
     for item in results:
-        x.write("%s,%s\n" % (item[0], item[1]))
+        x.write("%s,%s\n" % (record.print_time(item[0]), item[1]))
 
 results = resources.flush()
-with open('resources.txt', 'w') as y:
+with open(output_resources, 'w') as y:
     for item in results:
         y.write("%s\n" % item)
 
 results = blocked.flush()
-with open('blocked.txt', 'w') as z:
+with open(output_blocked, 'w') as z:
     for item in results:
         z.write("%s\n" % item)
