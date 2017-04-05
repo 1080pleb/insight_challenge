@@ -8,7 +8,7 @@ class TestHostsFeatureExtractor(unittest.TestCase):
     h = HostsFeatureExtractor()
     for r in records:
       h.add_record(r)
-    results = r.flush()
+    results = h.flush()
     self.assertDictEqual(results, {
         "199.72.81.55": 6,
         "burger.letters.com": 3,
