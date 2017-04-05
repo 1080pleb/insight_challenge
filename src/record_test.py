@@ -69,7 +69,7 @@ class TestRecordParsing(unittest.TestCase):
       pass
 
   def test_records_file(self):
-    records = record.read_from_file('log_test.txt')
+    records = record.read_from_file('../insight_testsuite/tests/test_features/log_input/log_test_100.txt')
     self.assertEqual(len(records), 100)
 
   def test_provided_test_file(self):
