@@ -9,9 +9,11 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
     for r in records:
       h.add_record(r)
     results = r.flush()
-    self.assertListEqual(results, [
-        '/login', '/shuttle/countdown/', '/shuttle/countdown/liftoff.html'
-    ])
+    self.assertDictEqual(results, {
+        '/login': 1,
+        '/shuttle/countdown/': 1,
+        '/shuttle/countdown/liftoff.html': 1
+    })
 
 if __name__ == '__main__':
   unittest.main()
