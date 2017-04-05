@@ -31,13 +31,11 @@ class TestRecordParsing(unittest.TestCase):
         self.assertEqual(r.bytes_transfered, 0)        
 
     def test_r4(self):
-        r = Record('klothos.crl.research.digital.com - - [10/Jul/1995:16:45:50 -0400] "" 400 -')
-        self.assertEqual(r.hostname, 'klothos.crl.research.digital.com')
-        self.assertEqual(r.timestamp, datetime.strptime('10/Jul/1995:16:45:50 -0400', '%d/%b/%Y:%H:%M:%S %z'))
-        self.assertEqual(r.command, 'GET')
-        #self.assertEqual(r.resource, '/shuttle/missions/sts-71/news')
-        self.assertEqual(r.response_code, 400)
-        self.assertEqual(r.bytes_transfered, 0)   
+        try:
+            Record('klothos.crl.research.digital.com - - [10/Jul/1995:16:45:50 -0400] "" 400 -')
+            self.fail('successfully parsed a message that should have failed')
+        except:
+            pass
 
     def test_r5(self):
         r = Record('firewall.dfw.ibm.com - - [20/Jul/1995:07:34:34 -0400] "1/history/apollo/images/" 400 -')
@@ -49,13 +47,11 @@ class TestRecordParsing(unittest.TestCase):
         self.assertEqual(r.bytes_transfered, 0)           
 
     def test_r6(self):
-        r = Record('128.159.122.20 - - [20/Jul/1995:15:28:50 -0400] "kĻtxĻtGĻt̓󢠴00 -')
-        self.assertEqual(r.hostname, '128.159.122.20')
-        self.assertEqual(r.timestamp, datetime.strptime('24/Jul/1995:13:52:50 -0400', '%d/%b/%Y:%H:%M:%S %z'))
-        self.assertEqual(r.command, 'GET')
-        #self.assertEqual(r.resource, '/shuttle/missions/sts-71/news')
-        self.assertEqual(r.response_code, 302)
-        self.assertEqual(r.bytes_transfered, 0)           
+        try:
+            Record('128.159.122.20 - - [20/Jul/1995:15:28:50 -0400] "kĻtxĻtGĻt̓󢠴00 -')
+            self.fail('successfully parsed a message that should have failed')
+        except:
+            pass
         
     def test_records_file(self):
         records = []
