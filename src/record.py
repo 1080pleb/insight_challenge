@@ -1,8 +1,10 @@
 from datetime import datetime
 
+TIME_FORMAT = '%d/%b/%Y:%H:%M:%S %z'
+
 def parse_time(time_str):
   """Parses a time in the format provided by our logs."""
-  return datetime.strptime(time_str, '%d/%b/%Y:%H:%M:%S %z')
+  return datetime.strptime(time_str, TIME_FORMAT)
 
 class Record:
     def __init__(self, row):
@@ -33,7 +35,7 @@ class Record:
             # part 3 is protocol but we don't care
     
     def __repr__(self):
-      return '%s - - [%s] "%s %s HTTP/1.0" %s %s' % (self.hostname, str(self.timestamp), self.command, self.resource, self.response_code, self.bytes_transfered)
+      return '%s - - [%s] "%s %s HTTP/1.0" %s %s' % (self.hostname, self.timestamp.strftime(TIME_FORMAT), self.command, self.resource, self.response_code, self.bytes_transfered)
 
 def read_from_file(filename):
   """Reads Records from a file line by line"""
