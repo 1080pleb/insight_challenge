@@ -22,19 +22,18 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
       h.add_record(r)
     results = h.flush()
     self.assertListEqual(results, [
-        'ppp-mia-30.shadow.net',
-        '205.189.154.54',
-        'd104.aa.net',
-        'unicomp6.unicomp.net',
-        '199.120.110.21',
-        'burger.letters.com',
-        '129.94.144.152',
-        '199.72.81.55',
-        'ix-orl2-01.ix.netcom.com',
-        'port26.annex2.nwlink.com',
+    '/shuttle/countdown/count.gif',
+    '/images/dual-pad.gif',
+    '/',
+    '/shuttle/missions/sts-70/images/KSC-95EC-1013.jpg',
+    '/history/apollo/apollo-13/images/70HC314.GIF',
+    '/shuttle/missions/sts-71/images/KSC-95EC-0882.jpg',
+    '/shuttle/technology/sts-newsref/sts_asm.html',
+    '/shuttle/missions/sts-71/images/KSC-95EC-0613.jpg',
+    '/shuttle/missions/sts-71/movies/sts-71-mir-dock-2.mpg',
+    '/shuttle/missions/sts-71/images/KSC-95EC-0912.gif'
     ])
     
-
   def test_sort_order(self):
     r1 = record.Record('b - - [01/Jul/1995:00:00:11 -0400] "GET /b HTTP/1.0" 304 0')
     r2 = record.Record('c - - [01/Jul/1995:00:00:11 -0400] "GET /c HTTP/1.0" 304 0')

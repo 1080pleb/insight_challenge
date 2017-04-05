@@ -10,6 +10,8 @@ class BandwidthFeatureExtractor:
     self.resources[r.resource] += r.bytes_transfered
  
   def flush(self):
-    # dump 10 highest
-    print(heapq.nsmallest(10, self.resources.items(), key=lambda i: (-i[1], i[0])))
-    return heapq.nlargest(10, self.resources.keys(), key=self.resources.__getitem__)
+    # we want resources by largest bandwidth with ties broken by the smallest string
+    # Python likes to do all its sorts in the same direction,
+    # so we negate the number and they both end up with the same sort order:
+    # smallest sort of negative bandwidth but positive string
+    return heapq.nsmallest(10, self.resources.keys(), key=lambda k: (-self.resources[k], k))

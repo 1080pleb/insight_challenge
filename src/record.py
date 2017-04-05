@@ -31,6 +31,9 @@ class Record:
             self.command = command_parts[0]
             self.resource = command_parts[1]
             # part 3 is protocol but we don't care
+    
+    def __repr__(self):
+      return '%s - - [%s] "%s %s HTTP/1.0" %s %s' % (self.hostname, str(self.timestamp), self.command, self.resource, self.response_code, self.bytes_transfered)
 
 def read_from_file(filename):
   """Reads Records from a file line by line"""
