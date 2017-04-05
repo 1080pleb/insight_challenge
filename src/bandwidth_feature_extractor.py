@@ -11,4 +11,5 @@ class BandwidthFeatureExtractor:
  
   def flush(self):
     # dump 10 highest
+    print(heapq.nsmallest(10, self.resources.items(), key=lambda i: (-i[1], i[0])))
     return heapq.nlargest(10, self.resources.keys(), key=self.resources.__getitem__)

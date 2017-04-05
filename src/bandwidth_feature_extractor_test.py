@@ -21,7 +21,20 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
     for r in records:
       h.add_record(r)
     results = h.flush()
-    self.assertEqual(len(results), 10)
+    print(results)
+    self.assertListEqual(results, [
+        'ppp-mia-30.shadow.net',
+        '205.189.154.54',
+        'd104.aa.net',
+        'unicomp6.unicomp.net',
+        '199.120.110.21',
+        'burger.letters.com',
+        '129.94.144.152',
+        '199.72.81.55',
+        'ix-orl2-01.ix.netcom.com',
+        'port26.annex2.nwlink.com',
+    ])
+    
 
 
 if __name__ == '__main__':
