@@ -21,7 +21,6 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
     for r in records:
       h.add_record(r)
     results = h.flush()
-    print(results)
     self.assertListEqual(results, [
         'ppp-mia-30.shadow.net',
         '205.189.154.54',
@@ -45,6 +44,7 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
     h.add_record(r1)
     h.add_record(r2)
     h.add_record(r3)
+    results = h.flush()
     self.assertListEqual(results, ['/a', '/b', '/c'])
 
 
