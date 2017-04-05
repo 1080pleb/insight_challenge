@@ -1,5 +1,9 @@
 from datetime import datetime
 
+def parse_time(time_str):
+  """Parses a time in the format provided by our logs."""
+  return datetime.strptime(time_str, '%d/%b/%Y:%H:%M:%S %z')
+
 class Record:
     def __init__(self, row):
         parts = row.split()
@@ -11,7 +15,7 @@ class Record:
             self.bytes_transfered = int(parts[-1])
 
         time_str = row[row.find('[') + 1:row.find(']')]
-        self.timestamp = datetime.strptime(time_str, '%d/%b/%Y:%H:%M:%S %z')
+        self.timestamp = parse_time(time_str)
 
         # commands_str should be of form "COMMAND RESOURCE PROTOCOL", but parts
         # of it can be missing, so we do a best effort parse.
