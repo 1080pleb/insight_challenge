@@ -38,7 +38,7 @@ class Record:
 def read_from_file(filename):
   """Reads Records from a file line by line"""
   records = []
-  with open(filename) as f:
+  with open(filename, encoding="ISO-8859-1") as f:
       for line in f.readlines():
           try:
               records.append(Record(line))

@@ -1,15 +1,13 @@
 #Implement feature 1
-import unittest
 import record
-from record import Record
+from busy_hours_feature_extractor import BusyHoursFeatureExtractor
 
-records = record.read_from_file('log_test2.txt')
+records = record.read_from_file('log.txt')
 print(len(records))
-print(records)
-#hostList = {}
+h = BusyHoursFeatureExtractor()
+for r in records:
+    h.add_record(r)
 
-#for entry in records:
-#    if entry[0] == self.hostname:
-        
+results = h.flush()
+print(results)
 
-#not up to date
