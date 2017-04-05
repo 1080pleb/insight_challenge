@@ -9,11 +9,20 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
     for r in records:
       h.add_record(r)
     results = h.flush()
-    self.assertDictEqual(results, {
-        '/login': 8520,
-        '/shuttle/countdown/': 7970,
-        '/shuttle/countdown/liftoff.html': 0
-    })
+    self.assertListEqual(results, [
+        '/login',
+        '/shuttle/countdown/',
+        '/shuttle/countdown/liftoff.html'
+    ])
+    
+  def test_larger_records_file(self):
+    records = record.read_from_file('../insight_testsuite/tests/test_features/log_input/log_test_100.txt')
+    h = BandwidthFeatureExtractor()
+    for r in records:
+      h.add_record(r)
+    results = h.flush()
+    self.assertEqual(len(results), 10)
+
 
 if __name__ == '__main__':
   unittest.main()

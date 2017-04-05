@@ -13,5 +13,9 @@ class HostsFeatureExtractor:
   def flush(self):
     return self.host_list
     # dump 10 highest
-    #top_10_hosts = heapq.nlargest(10, hostList)
+    #top_10_hosts = heapq.nlargest(10, host_list, key=itegetter(1))
+    #with open('hosts.txt','w') as f:
+        #
+    
+
     
