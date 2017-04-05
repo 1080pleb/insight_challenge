@@ -8,11 +8,11 @@ class TestBandwidthFeatureExtractor(unittest.TestCase):
     h = BandwidthFeatureExtractor()
     for r in records:
       h.add_record(r)
-    results = r.flush()
+    results = h.flush()
     self.assertDictEqual(results, {
-        '/login': 1,
-        '/shuttle/countdown/': 1,
-        '/shuttle/countdown/liftoff.html': 1
+        '/login': 8520,
+        '/shuttle/countdown/': 7970,
+        '/shuttle/countdown/liftoff.html': 0
     })
 
 if __name__ == '__main__':
