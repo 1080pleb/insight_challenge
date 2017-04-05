@@ -14,12 +14,15 @@ class Record:
         self.timestamp = datetime.strptime(time_str, '%d/%b/%Y:%H:%M:%S %z')
 
         command_str = row[row.find('"') + 1:row.rfind('"')]
-        try:
-            command_parts = command_str.split()
-        except:
-            self.resource = command_str
-        self.command =  command_parts[0]
-        self.resource = command_parts[1]
-        #self.protocol = command_parts[2]
+        command_parts = commad_str.split()
+        if len(command_parts) == 1:
+            self.resource = command_parts
+        elif len(command_parts) == 2:
+            self.command = command_parts[0]
+            self.resource = command_parts[1]
+        else:
+            self.command = command_parts[0]
+            self.resource = command_parts[1]
+            #self.protocol = command_parts[2]
         # command_parts[2] is usually the protocol (HTTP/1.0) but not all lines
         # have it and we don't need it anyway, so skip it.
