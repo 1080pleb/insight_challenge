@@ -1,6 +1,9 @@
 #Implement feature 1
 import record
 from busy_hours_feature_extractor import BusyHoursFeatureExtractor
+from bad_login_feature_extractor import BadLoginFeatureExtractor
+from bandwidth_feature_extractor import BandwidthFeatureExtractor 
+from hosts_feature_extractor import HostsFeatureExtractor 
 import time
 import sys
 
@@ -26,6 +29,16 @@ def print_progress (iteration, total, prefix = '', suffix = '', decimals = 1, le
     if iteration == total: 
         print()
 
+if len(sys.argv) < 6:
+    # ./src/process_log.py log.txt hosts.txt hours.txt resources.txt blocked.txt
+    print('Usage: %s <log> <hosts out> <hours out> <resources out> <blocked out>' % sys.argv[0])
+    sys.exit(1)
+
+input_log = sys.argv[1]
+output_hosts = sys.argv[2]
+output_hours = sys.argv[3]
+output_resources = sys.argv[4]
+output_blocked = sys.argv[5]
 
 processed = 0
 total = 4400644 # we cheated and know apriori
@@ -33,9 +46,10 @@ now = time.clock()
 
 hours = BusyHoursFeatureExtractor()
 hosts = HostsFeatureExtractor()
+resources = BandwidthFeatureExtractor()
+blocks = BadLoginFeatureExtractor()
 
-with open('log.txt', encoding="ISO-8859-1") as f:
-  start = time.now()
+with open(input_log, encoding="ISO-8859-1") as f:
   for line in f.readlines():
       # Handle progress bar
       if time.clock() - now > 1:
@@ -47,11 +61,20 @@ with open('log.txt', encoding="ISO-8859-1") as f:
       try:
           r = record.Record(line)
           hours.add_record(r)
+          hosts.add_record(r)
+          resources.add_record(r)
+          blocks.add_record(r)
       except KeyboardInterrupt:
           raise
       except Exception as e:
           print(e)
           print('Error parsing line:', line)
 
+results = h.flush()
+print(results)
+results = h.flush()
+print(results)
+results = h.flush()
+print(results)
 results = h.flush()
 print(results)
