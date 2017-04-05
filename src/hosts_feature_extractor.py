@@ -1,21 +1,20 @@
 from record import Record
 from collections import defaultdict
+from operator import itemgetter
 import heapq
 
 class HostsFeatureExtractor:
   def __init__(self):
-    self.host_list = defaultdict(lambda: 0)
+    self.hosts = defaultdict(lambda: 0)
     
   def add_record(self, r):
     """Adds a record to the feature extractor"""
-    self.host_list[r.hostname] += 1
+    self.hosts[r.hostname] += 1
  
   def flush(self):
-    return self.host_list
-    # dump 10 highest
-    #top_10_hosts = heapq.nlargest(10, host_list, key=itegetter(1))
-    #with open('hosts.txt','w') as f:
-        #
-    
+    # we want the large number with ties broken by the smallest string
+    # Python likes to do all its sorts in the same direction,
+    #   so we negate the number and they both end up with the same sort order
+    return heapq.nsmallest(10, self.hosts.items(), key=lambda i: (-i[1], i[0]))
 
     
