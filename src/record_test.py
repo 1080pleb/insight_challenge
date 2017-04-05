@@ -57,5 +57,9 @@ class TestRecordParsing(unittest.TestCase):
         records = record.read_from_file('log_test.txt')
         self.assertEqual(len(records), 100)
 
+    def test_provided_test_file(self):
+        records = record.read_from_file('../insight_testsuite/tests/test_features/log_input/log.txt')
+        self.assertEqual(len(records), 10)
+
 if __name__ == '__main__':
     unittest.main()
