@@ -1,8 +1,10 @@
 from record import Record
-import datetime
 from collections import defaultdict
 from operator import itemgetter
 import heapq
+
+LOGIN_ATTEMPT_WINDOW = 20
+BLOCK_WINDOW = 300
 
 class TimeWindow:
   def __init__(self, time):
@@ -45,11 +47,12 @@ class HostTracker:
     num_inactive_windows = 0
     
     # checks number of open windows for given time period (20s)
+    oldest_acceptable_window = r.timestamp - LOGIN_ATTEMPT_WINDOW
     for win in self.active_windows:
-        if r.timestamp < win.start_time + datetime.timedelta(seconds=20):
+        if oldest_acceptable_window < win.start_time:
             win.count += 1
             if win.count >= 3:
-                self.block_until = r.timestamp + datetime.timedelta(seconds=300)
+                self.block_until = r.timestamp + BLOCK_WINDOW
                 self.active_windows = []
                 # Do not block event that triggers block!
                 return False
