@@ -1,7 +1,4 @@
-Project is written using python3.
-
-It was tested on a windows 7 machine (Python version 3.6.0), a macbook
-pro (version 3.5.1), and a linux machine (version 3.4.3).
+The main driver is process_log.py
 
 The input file is parsed via record.py into Record objects. Records are passed
 to each of the four Feature Extractors which use the parts they need. Feature
@@ -17,6 +14,9 @@ produce a cluster of overlapping windows. The Alternate version only opens windo
 when events arrive leading to a broader distribtuion of traffic-dense periods.
 
 On a reasonable machine, this processes approximately 2000 records per second.
+Project is written using python3.
+It was tested on a windows 7 machine (Python version 3.6.0), a macbook
+pro (version 3.5.1), and a linux machine (version 3.4.3).
 
 Contact info:
 jpnmitchell@gmail.com
