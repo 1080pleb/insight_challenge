@@ -2,7 +2,8 @@ import record
 from busy_hours_feature_extractor import BusyHoursFeatureExtractor
 from bad_login_feature_extractor import BadLoginFeatureExtractor
 from bandwidth_feature_extractor import BandwidthFeatureExtractor 
-from hosts_feature_extractor import HostsFeatureExtractor 
+from hosts_feature_extractor import HostsFeatureExtractor
+from busy_hours_feature_extractor_alternate import BusyHoursFeatureExtractorAlternate
 import time
 import sys
 
@@ -44,6 +45,8 @@ total = 4400644 # we cheated and know apriori
 now = time.clock()
 
 hours = BusyHoursFeatureExtractor()
+#Tweak this to try alternate version
+#hours = BusyHoursFeatureExtractorAlternate()
 hosts = HostsFeatureExtractor()
 resources = BandwidthFeatureExtractor()
 blocked = BadLoginFeatureExtractor()
